@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bootstrap Logistics, LLC — Medical Courier</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --sage: #8a9a7a;
+    --sage-dark: #6b7a5c;
+    --sage-light: #b8c4a8;
+    --bg: #8a9a7a;
+    --bg-light: #9aaa8a;
+    --charcoal: #1e2420;
+    --charcoal-mid: #2e3830;
+    --brown: #6b3e26;
+    --red: #d63c2f;
+    --white: #f4f6f0;
+    --text-muted: #2e3830;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--bg);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--charcoal);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    border-bottom: 3px solid var(--red);
+  }
+  .nav-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+  .nav-brand span { color: var(--red); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bg-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta {
+    background: var(--red);
+    color: var(--white) !important;
+    padding: 8px 20px;
+    border-radius: 2px;
+  }
+  .nav-cta:hover { background: #b83228; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--charcoal);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 64px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 41px
+    );
+    pointer-events: none;
+  }
+  .hero-text {
+    padding: 80px 64px 80px 80px;
+    position: relative; z-index: 2;
+    animation: fadeUp 0.9s ease both;
+  }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 40px; height: 2px;
+    background: var(--red);
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    line-height: 0.95;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    margin-bottom: 28px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--sage-light);
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--sage-light);
+    line-height: 1.7;
+    max-width: 440px;
+    margin-bottom: 48px;
+  }
+  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--red);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border: none; border-radius: 2px;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #b83228; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--sage-light);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 34px;
+    border: 2px solid var(--sage);
+    border-radius: 2px;
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--white); color: var(--white); }
+
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+    padding: 80px 80px 80px 40px;
+    position: relative; z-index: 2;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+  .hero-logo-wrap {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 48px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  .hero-logo-wrap::before {
+    content: '';
+    position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--red), var(--sage-dark));
+    z-index: -1;
+  }
+  .hero-logo-wrap img {
+    width: 280px; max-width: 100%;
+    display: block;
+  }
+
+  /* heartbeat bar */
+  .heartbeat-bar {
+    background: var(--charcoal-mid);
+    padding: 20px 80px;
+    display: flex; align-items: center; gap: 24px;
+    overflow: hidden;
+  }
+  .hb-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    white-space: nowrap;
+  }
+  .hb-line {
+    flex: 1;
+    height: 2px;
+    background: var(--charcoal);
+    position: relative;
+    overflow: hidden;
+  }
+  .hb-pulse {
+    position: absolute; top: 50%; left: -100%;
+    transform: translateY(-50%);
+    width: 100%;
+    animation: pulse-move 3s linear infinite;
+  }
+  @keyframes pulse-move { to { left: 100%; } }
+
+  /* ── TRUST STRIP ── */
+  .trust-strip {
+    background: var(--sage-dark);
+    border-top: 1px solid var(--sage);
+    border-bottom: 1px solid var(--sage);
+    padding: 32px 80px;
+    display: flex; justify-content: center; gap: 64px; flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--white);
+  }
+  .trust-icon { font-size: 1.4rem; }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 100px 80px; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    display: block; width: 30px; height: 2px;
+    background: var(--red);
+  }
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    color: var(--charcoal);
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--bg); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    margin-top: 60px;
+    border: 2px solid var(--charcoal);
+  }
+  .service-card {
+    background: var(--charcoal);
+    padding: 44px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .service-card:hover { background: var(--charcoal-mid); }
+  .service-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--sage-dark);
+    line-height: 1;
+    margin-bottom: 20px;
+    opacity: 0.6;
+  }
+  .service-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.3rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .service-desc {
+    font-size: 0.95rem;
+    color: var(--sage-light);
+    line-height: 1.7;
+  }
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  /* ── WHY US ── */
+  #why { background: var(--bg-light); }
+  .why-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 60px;
+  }
+  .why-list { display: flex; flex-direction: column; gap: 28px; }
+  .why-item {
+    display: flex; gap: 24px; align-items: flex-start;
+    padding: 28px;
+    background: var(--charcoal);
+    border-left: 4px solid var(--red);
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .why-item:hover { transform: translateX(6px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+  .why-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--red);
+    min-width: 48px;
+    line-height: 1;
+  }
+  .why-content h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .why-content p { font-size: 0.93rem; color: var(--sage-light); line-height: 1.6; }
+
+  .why-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .stat-box {
+    background: var(--charcoal);
+    padding: 40px 28px;
+    text-align: center;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .stat-box:hover { transform: translateY(-4px); }
+  .stat-box::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--red);
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: var(--white);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--sage-light);
+    margin-top: 8px;
+    display: block;
+  }
+
+  /* ── PROCESS ── */
+  #process { background: var(--charcoal); }
+  #process h2 { color: var(--white); }
+  #process .section-label { color: var(--red); }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 60px;
+    position: relative;
+  }
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 40px; left: 10%; right: 10%;
+    height: 2px;
+    background: linear-gradient(to right, var(--red), var(--sage-dark));
+  }
+  .step {
+    padding: 24px 24px 40px;
+    text-align: center;
+    position: relative;
+  }
+  .step-circle {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: var(--charcoal-mid);
+    border: 3px solid var(--red);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--red);
+    position: relative; z-index: 2;
+    transition: background 0.2s;
+  }
+  .step:hover .step-circle { background: var(--red); color: var(--white); }
+  .step-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .step-desc { font-size: 0.9rem; color: var(--sage-light); line-height: 1.65; }
+
+  /* ── COVERAGE ── */
+  #coverage { background: var(--bg); }
+  .coverage-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    margin-top: 60px;
+  }
+  .coverage-text p {
+    font-size: 1.05rem;
+    color: var(--charcoal);
+    line-height: 1.75;
+    margin-top: 24px;
+    margin-bottom: 36px;
+  }
+  .coverage-map {
+    background: var(--charcoal);
+    border-radius: 6px;
+    padding: 48px;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 320px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+  .map-placeholder {
+    text-align: center;
+  }
+  .map-placeholder .map-icon { font-size: 4rem; margin-bottom: 16px; display: block; }
+  .map-placeholder p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--sage-light);
+    margin: 0;
+  }
+  /* animated ping dots */
+  .ping-wrap {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .ping {
+    position: absolute;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--red);
+  }
+  .ping::after {
+    content: '';
+    position: absolute; inset: -6px;
+    border-radius: 50%;
+    border: 2px solid var(--red);
+    animation: ping-anim 2s ease-out infinite;
+  }
+  .ping:nth-child(1) { top: 30%; left: 40%; animation-delay: 0s; }
+  .ping:nth-child(2) { top: 55%; left: 60%; animation-delay: 0.7s; }
+  .ping:nth-child(3) { top: 20%; left: 65%; animation-delay: 1.4s; }
+  @keyframes ping-anim {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(3); }
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--charcoal);
+    color: var(--white);
+  }
+  #contact h2 { color: var(--white); }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+    margin-top: 60px;
+  }
+  .contact-info p {
+    font-size: 1rem;
+    color: var(--sage-light);
+    line-height: 1.75;
+    margin-bottom: 40px;
+  }
+  .contact-detail {
+    display: flex; align-items: center; gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--charcoal-mid);
+  }
+  .contact-detail:first-of-type { border-top: 1px solid var(--charcoal-mid); }
+  .contact-detail .cd-icon { font-size: 1.4rem; }
+  .contact-detail .cd-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--white);
+  }
+  .contact-detail .cd-label {
+    font-size: 0.78rem; font-weight: 400;
+    color: var(--sage-light);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: block;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    background: var(--charcoal-mid);
+    border: 1px solid #3a4540;
+    color: var(--white);
+    padding: 16px 20px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder { color: var(--text-muted); }
+  .contact-form input:focus,
+  .contact-form select:focus,
+  .contact-form textarea:focus { border-color: var(--red); }
+  .contact-form select option { background: var(--charcoal); }
+  .contact-form textarea { resize: vertical; min-height: 120px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #111614;
+    padding: 40px 80px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+    border-top: 3px solid var(--red);
+  }
+  .footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+  }
+  .footer-brand span { color: var(--red); }
+  .footer-copy {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--red); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 0; }
+    .hero-text { padding: 60px 32px 40px; }
+    .hero-visual { padding: 20px 32px 60px; }
+    .hero-logo-wrap img { width: 200px; }
+    section { padding: 60px 32px; }
+    .trust-strip { padding: 24px 32px; gap: 32px; }
+    .heartbeat-bar { padding: 16px 32px; }
+    .why-inner, .contact-inner, .coverage-inner { grid-template-columns: 1fr; gap: 40px; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .steps::before { display: none; }
+    .why-stats { grid-template-columns: 1fr 1fr; }
+    footer { padding: 32px; flex-direction: column; align-items: flex-start; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#"><span>B</span>ootstrap Logistics</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#coverage">Coverage</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Medical Courier Services</div>
+    <h1>Delivering <em>Critical</em><br>Care, On Time.<br>Every Time.</h1>
+    <p class="hero-sub">Bootstrap Logistics, LLC is your trusted partner for time-sensitive medical specimen and supply transport — built from the ground up with reliability, compliance, and precision at the core.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Request a Pickup</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-logo-wrap">
+      <img src="/mnt/user-data/uploads/BootStrapLogo.JPEG" alt="Bootstrap Logistics LLC Logo" />
+    </div>
+  </div>
+</section>
+
+<!-- HEARTBEAT BAR -->
+<div class="heartbeat-bar">
+  <span class="hb-label">Live Dispatch</span>
+  <div class="hb-line">
+    <svg class="hb-pulse" viewBox="0 0 300 20" height="20" preserveAspectRatio="none">
+      <polyline points="0,10 40,10 55,2 65,18 75,2 85,18 95,10 150,10 300,10"
+        fill="none" stroke="#d63c2f" stroke-width="2" />
+    </svg>
+  </div>
+  <span class="hb-label">24/7 Availability</span>
+</div>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item"><span class="trust-icon">🔬</span> Lab Specimens</div>
+  <div class="trust-item"><span class="trust-icon">💊</span> Pharmacy Deliveries</div>
+  <div class="trust-item"><span class="trust-icon">🧊</span> Temperature-Controlled</div>
+  <div class="trust-item"><span class="trust-icon">🔐</span> HIPAA Compliant</div>
+  <div class="trust-item"><span class="trust-icon">⏱</span> Same-Day Routes</div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What We Do</div>
+  <h2>Medical Courier Services<br>Built for Healthcare</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">🧪</span>
+      <div class="service-num">01</div>
+      <div class="service-title">Lab Specimen Transport</div>
+      <p class="service-desc">Reliable pickup and delivery of blood samples, biopsies, urine cultures, and other diagnostic specimens with strict chain-of-custody documentation.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💊</span>
+      <div class="service-num">02</div>
+      <div class="service-title">Pharmacy & Medication</div>
+      <p class="service-desc">Prompt delivery of prescriptions and pharmaceutical supplies to patients, clinics, and long-term care facilities across our service area.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🧊</span>
+      <div class="service-num">03</div>
+      <div class="service-title">Temperature-Sensitive Cargo</div>
+      <p class="service-desc">Cold-chain compliant transport for vaccines, biologics, blood products, and frozen specimens with monitored packaging solutions.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🏥</span>
+      <div class="service-num">04</div>
+      <div class="service-title">Hospital & Clinic Routing</div>
+      <p class="service-desc">Scheduled daily routes between hospitals, outpatient clinics, and physician offices — reducing turnaround times for critical test results.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">⚡</span>
+      <div class="service-num">05</div>
+      <div class="service-title">STAT & Emergency Runs</div>
+      <p class="service-desc">Urgent, time-critical deliveries dispatched within minutes. When results can't wait, Bootstrap is on the road.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📋</span>
+      <div class="service-num">06</div>
+      <div class="service-title">Medical Records & Supplies</div>
+      <p class="service-desc">Secure transport of medical documents, office supplies, equipment parts, and non-hazardous materials between facilities.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-label">Why Bootstrap</div>
+  <h2>Reliability Built into<br>Every Route</h2>
+  <div class="why-inner">
+    <div class="why-list reveal">
+      <div class="why-item">
+        <div class="why-num">01</div>
+        <div class="why-content">
+          <h3>HIPAA-Trained Couriers</h3>
+          <p>Every driver completes HIPAA compliance training and background screening before their first dispatch — protecting your patients and your practice.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">02</div>
+        <div class="why-content">
+          <h3>Real-Time GPS Tracking</h3>
+          <p>Know exactly where your delivery is at every stage. Our dispatch system provides live updates from pickup to drop-off.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">03</div>
+        <div class="why-content">
+          <h3>Proof of Delivery</h3>
+          <p>Digital signatures, timestamps, and delivery confirmation on every run — full chain of custody for audit-ready documentation.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">04</div>
+        <div class="why-content">
+          <h3>Fully Insured & Licensed</h3>
+          <p>Bootstrap Logistics operates with full commercial carrier liability insurance and all applicable state-level medical courier certifications.</p>
+        </div>
+      </div>
+    </div>
+    <div class="why-stats reveal">
+      <div class="stat-box">
+        <span class="stat-num">99%</span>
+        <span class="stat-label">On-Time Delivery Rate</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">24/7</span>
+        <span class="stat-label">Dispatch Available</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">&lt;30<span style="font-size:1.8rem">min</span></span>
+        <span class="stat-label">STAT Response Time</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">HIPAA Compliant</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-label">How It Works</div>
+  <h2>Simple. Reliable. Tracked.</h2>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-circle">01</div>
+      <div class="step-title">Request a Pickup</div>
+      <p class="step-desc">Call dispatch, submit online, or use our scheduled route system. STAT requests are prioritized immediately.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-circle">02</div>
+      <div class="step-title">Driver Assigned</div>
+      <p class="step-desc">A trained, credentialed courier is dispatched to your location with appropriate transport packaging.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-circle">03</div>
+      <div class="step-title">Secure Transport</div>
+      <p class="step-desc">Your specimens or supplies are transported with GPS tracking, temperature monitoring, and chain of custody maintained.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-circle">04</div>
+      <div class="step-title">Confirmed Delivery</div>
+      <p class="step-desc">Digital proof of delivery is captured and sent to you instantly. Records are archived for compliance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COVERAGE -->
+<section id="coverage">
+  <div class="section-label">Service Area</div>
+  <h2>Serving the<br>Carolinas & Beyond</h2>
+  <div class="coverage-inner">
+    <div class="coverage-text reveal">
+      <p>Based in Clinton, North Carolina, Bootstrap Logistics provides medical courier services throughout Sampson County and the surrounding region — including Dunn, Goldsboro, Fayetteville, and Wilmington. We're expanding our footprint to serve more healthcare networks across the Carolinas.</p>
+      <p>Whether you need a daily scheduled route between facilities or an on-demand STAT run across the region, our fleet is ready to move when you need us most.</p>
+      <a href="#contact" class="btn-primary">Check Your Coverage</a>
+    </div>
+    <div class="coverage-map reveal">
+      <div class="ping-wrap">
+        <div class="ping"></div>
+        <div class="ping"></div>
+        <div class="ping"></div>
+      </div>
+      <div class="map-placeholder">
+        <span class="map-icon">🗺</span>
+        <p>Clinton, NC — Home Base</p>
+        <p style="margin-top:8px; font-size:0.85rem; color:#5a6355;">Serving Sampson County & Surrounding Areas</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2>Request a Quote or<br>Schedule a Route</h2>
+  <div class="contact-inner">
+    <div class="contact-info reveal">
+      <p>Ready to partner with Bootstrap Logistics? Reach out for a free consultation, custom route pricing, or to set up an account for your facility.</p>
+      <div class="contact-detail">
+        <span class="cd-icon">📞</span>
+        <div>
+          <span class="cd-label">Dispatch & Sales</span>
+          <span class="cd-text">(910) 555-0100</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <span class="cd-icon">📧</span>
+        <div>
+          <span class="cd-label">Email Us</span>
+          <span class="cd-text">dispatch@bootstraplogisticsllc.com</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <span class="cd-icon">📍</span>
+        <div>
+          <span class="cd-label">Based In</span>
+          <span class="cd-text">Clinton, North Carolina</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <span class="cd-icon">🕐</span>
+        <div>
+          <span class="cd-label">Hours</span>
+          <span class="cd-text">24 / 7 — 365 Days a Year</span>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <input type="text" placeholder="Your Name" required />
+        <input type="text" placeholder="Facility / Organization" />
+      </div>
+      <div class="form-row">
+        <input type="tel" placeholder="Phone Number" />
+        <input type="email" placeholder="Email Address" required />
+      </div>
+      <select>
+        <option value="" disabled selected>Service Needed</option>
+        <option>Lab Specimen Transport</option>
+        <option>Pharmacy / Medication Delivery</option>
+        <option>Temperature-Sensitive Cargo</option>
+        <option>Scheduled Route Setup</option>
+        <option>STAT / Emergency Run</option>
+        <option>Medical Records / Supplies</option>
+        <option>Other</option>
+      </select>
+      <textarea placeholder="Tell us more about your needs — pickup location, frequency, volume, etc."></textarea>
+      <button type="submit" class="btn-primary" style="border:none; cursor:pointer; font-size:1rem;">Send Request →</button>
+      <p id="form-success" style="color:#8a9a7a; font-size:0.9rem; display:none; margin-top:8px;">✓ Message received! We'll be in touch shortly.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><span>Bootstrap</span> Logistics, LLC</div>
+  <div class="footer-copy">© 2025 Bootstrap Logistics, LLC · Clinton, NC · All rights reserved.</div>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">HIPAA Notice</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-success').style.display = 'block';
+    e.target.querySelectorAll('input,select,textarea').forEach(el => el.value = '');
+  }
+</script>
+</body>
+</html>
